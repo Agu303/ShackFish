@@ -1,0 +1,14 @@
+Chess pieces by Colin M. L. Burnett. SVG source from the Cburnett piece set in
+Lichess, distributed under GPL v2 or later (a copy of GPL v3 is bundled in
+resources/engine/Copying.txt).
+https://github.com/lichess-org/lila/tree/master/public/piece/cburnett
+https://github.com/lichess-org/lila/blob/master/COPYING.md
+
+See resources/engine/SOURCE.txt for Stockfish credits, licensing and source.
+
+Inter Variable is licensed under SIL OFL 1.1 (Inter-LICENSE.txt).
+Lucide icons are distributed under ISC (Lucide-LICENSE.txt).
+
+Opening data is derived from Lichess chess-openings under CC0 1.0
+(Openings-LICENSE.txt).
+https://github.com/lichess-org/chess-openings/tree/3ba6b20d31b2e6125cb0e6a2e792f400717d9d39

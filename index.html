@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; connect-src 'none'; object-src 'none'; base-uri 'none'">
+  <title>ShackFish</title>
+  <link rel="icon" href="./logo.png">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><img src="./logo.png" alt=""><div><strong>ShackFish</strong><span>Chess analysis</span></div></div>
+      <div class="sidebar-body">
+        <button id="new-game" class="side-action"><i data-lucide="plus"></i> New board <kbd>Ctrl N</kbd></button>
+        <button id="import-game" class="side-action"><i data-lucide="file-up"></i> Import PGN <kbd>Ctrl O</kbd></button>
+        <button id="load-fen" class="side-action"><i data-lucide="scan-line"></i> Load position</button>
+        <button id="board-tab" class="side-action" aria-current="page"><i data-lucide="layout-grid"></i> Analysis board</button>
+        <button id="scout-tab" class="side-action"><i data-lucide="activity"></i> Scouting report</button>
+        <button id="engines-tab" class="side-action"><i data-lucide="cpu"></i> Engines</button>
+        <button id="interface-settings" class="side-action"><i data-lucide="settings-2"></i> Interface settings</button>
+        <div class="library-heading">Game library</div>
+        <div id="library"></div>
+        <div id="imports" hidden>
+          <div class="library-heading">Unsaved imports</div>
+          <div id="import-list"></div>
+        </div>
+      </div>
+      <div class="sidebar-footer"><span class="footer-icon"><i data-lucide="cpu"></i></span><div><strong id="engine-name">Stockfish 19</strong><span>Local engine</span></div></div>
+    </aside>
+    <main>
+      <header class="topbar">
+        <div class="title"><i data-lucide="layout-grid"></i><h1 id="game-title">Analysis board</h1></div>
+        <div class="top-actions">
+          <button id="board-colors" class="button"><i data-lucide="palette"></i> Board colors</button>
+          <button id="flip" class="button"><i data-lucide="arrow-up-down"></i> Flip board</button>
+          <button id="export" class="button"><i data-lucide="download"></i> Export PGN</button>
+          <button id="save-game" class="button primary"><i data-lucide="save"></i> <span>Save game</span></button>
+        </div>
+      </header>
+      <div id="board-workspace" class="workspace">
+        <section class="board-area" aria-label="Chessboard">
+          <div class="board-layout">
+          <div class="board-stack">
+            <div id="player-top" class="player"></div>
+            <div class="board-row">
+              <div id="eval-meter" class="eval-meter" title="Evaluation from White’s perspective"><div id="eval-fill"></div></div>
+              <div class="board-frame">
+                <div id="board" class="board"></div>
+                <svg id="review-overlay" viewBox="0 0 800 800" aria-hidden="true"></svg>
+              </div>
+            </div>
+            <div id="player-bottom" class="player"></div>
+            <div class="board-controls">
+              <button class="button icon" id="first" title="First position" aria-label="First position"><i data-lucide="chevrons-left"></i></button>
+              <button class="button icon" id="prev" title="Previous move" aria-label="Previous move"><i data-lucide="chevron-left"></i></button>
+              <span id="ply-label"></span>
+              <button class="button icon" id="next" title="Next move" aria-label="Next move"><i data-lucide="chevron-right"></i></button>
+              <button class="button icon" id="last" title="Last position" aria-label="Last position"><i data-lucide="chevrons-right"></i></button>
+            </div>
+            <section id="retry-panel" class="panel coach-strip" hidden>
+              <img src="./logo.png" alt="">
+              <div><strong id="retry-title"></strong><p id="retry-feedback" aria-live="polite"></p>
+                <div class="tool-actions"><button id="retry-reveal" class="button compact">Reveal answer</button><button id="retry-next" class="button compact">Next position</button><button id="retry-exit" class="button compact">End practice</button></div>
+              </div>
+            </section>
+          </div>
+          <div id="reaction-space">
+            <aside id="board-reaction" class="board-reaction" aria-label="ShackFish commentary" hidden>
+              <svg id="reaction-tail" aria-hidden="true"></svg>
+              <button id="reaction-sprite" type="button" aria-label="Dismiss ShackFish"><img alt=""></button>
+              <button id="reaction-bubble" type="button" aria-label="Dismiss ShackFish commentary" aria-describedby="reaction-copy">
+                <span id="reaction-copy" aria-live="polite">
+                  <strong id="reaction-title"></strong>
+                  <span id="reaction-lesson"></span>
+                  <em id="reaction-quip"></em>
+                </span>
+              </button>
+            </aside>
+          </div>
+          </div>
+        </section>
+        <aside class="inspector" aria-label="Analysis and game history">
+          <section class="panel">
+            <div class="panel-heading"><h2><i data-lucide="activity"></i> Live analysis</h2><button id="live" class="switch" role="switch" aria-checked="true" title="Toggle live analysis" aria-label="Live analysis"></button></div>
+            <div class="eval-summary"><strong id="score">—</strong><span id="evaluation">Waiting for engine</span></div>
+            <div id="engine-lines" class="lines"></div>
+            <div class="analysis-footer">
+              <span id="engine-status" role="status"></span>
+              <button id="settings" type="button" class="icon-link" title="Engine settings" aria-label="Engine settings"><i data-lucide="settings-2"></i></button>
+            </div>
+          </section>
+          <section class="panel game-panel">
+            <div class="panel-heading"><h2><i data-lucide="list-ordered"></i> Moves</h2><button id="review" class="button compact"><i data-lucide="chart-no-axes-combined"></i><span>Review game</span></button></div>
+            <div id="review-tools" class="review-tools">
+              <button id="quick-review" class="button compact">Quick review</button>
+              <button id="prev-critical" class="button compact" title="Previous critical move">‹ Critical</button>
+              <button id="next-critical" class="button compact" title="Next critical move">Critical ›</button>
+              <button id="worst-move" class="button compact">Biggest swing</button>
+              <button id="retry-mistakes" class="button compact">Retry my mistakes</button>
+              <button id="decision-journal" class="button compact">Decision journal</button>
+            </div>
+            <div id="review-summary" hidden></div>
+            <div id="review-graph" hidden></div>
+            <div id="move-annotation" hidden></div>
+            <div id="move-list"></div>
+          </section>
+        </aside>
+      </div>
+      <section id="scout-page" class="tool-page" hidden></section>
+      <section id="engines-page" class="tool-page" hidden></section>
+    </main>
+  </div>
+  <div id="toast" role="status" hidden></div>
+  <dialog id="prompt" aria-labelledby="prompt-title"><form id="prompt-form"><div class="dialog-heading"><h2 id="prompt-title"></h2><button id="close-prompt" type="button" class="icon-link" aria-label="Close"><i data-lucide="x"></i></button></div><div id="prompt-body"></div><p id="prompt-error" role="alert" hidden></p><div class="dialog-actions"><button id="prompt-alt" type="button" class="button" hidden></button><button id="prompt-submit" class="button primary"></button></div></form></dialog>
+  <script type="module" src="/src/renderer.mjs"></script>
+</body>
+</html>

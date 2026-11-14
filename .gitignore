@@ -1,0 +1,5 @@
+.cache/
+node_modules/
+dist/
+release/
+engine/stockfish.exe

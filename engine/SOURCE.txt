@@ -1,0 +1,13 @@
+Stockfish 19, official Windows x86-64 universal binary
+Copyright 2004–2026 the Stockfish developers. See AUTHORS and Copying.txt.
+License: GPL-3.0-or-later.
+
+Release archive:
+https://github.com/official-stockfish/Stockfish/releases/download/sf_19/stockfish-windows-x86-64-universal.zip
+SHA-256: 3c8bf1f9ea66a09350a40df4f632288285ac206d99f33ab5842c408fc30b48a7
+
+Corresponding source (including build scripts):
+https://github.com/official-stockfish/Stockfish/tree/edb0d9db6731067ec50ce619ff372b463bc4dd5d
+https://github.com/official-stockfish/Stockfish/releases/tag/sf_19
+The official release archive also includes the build source tree. The engine
+executable was copied from that archive and renamed for the app.
