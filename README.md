@@ -2,6 +2,10 @@
 
 ShackFish is a Windows desktop app for reviewing chess games, practicing mistakes, and comparing UCI engines. It uses the official Stockfish engine for local analysis and adds a board-side mascot that explains the moves worth revisiting.
 
+![ShackFish reviewing a blunder with board arrows, mascot commentary, and a move-by-move evaluation graph](docs/images/game-review.png)
+
+*Game review catches the blunder in Fool's Mate. The green arrow shows Stockfish's recommendation from before the blunder, and the purple arrow shows Black's mating reply.*
+
 ## What you can do
 
 | Feature | How it works |
@@ -16,6 +20,17 @@ ShackFish is a Windows desktop app for reviewing chess games, practicing mistake
 | **ShackFish coach and appearance** | Board highlights, engine arrows, and mascot reactions explain important moves. Adjust profanity, turn off commentary, customize board colors, and size text and buttons independently. |
 
 Stockfish analysis and saved games stay on your machine. Scouting uses the sites' public game feeds and needs an internet connection. It asks for a username, without a password or access token.
+
+## Screenshots
+
+| Opening commentary | Retry my mistakes |
+| --- | --- |
+| ![The ShackFish mascot holding notes beside a thought bubble identifying a book move](docs/images/mascot-commentary.png) | ![The retry board with analysis hidden and a Reveal answer button](docs/images/retry-mistakes.png) |
+| ShackFish identifies a book move and shows the engine's preferred move. | Replay a mistake from the original position before revealing Stockfish's answer. |
+
+![Engine Autopsy comparing two local Stockfish executables with matching search settings](docs/images/engine-autopsy.png)
+
+*Engine Autopsy compares the bundled Stockfish against a second copy as a baseline check. Expand a position to inspect both lines and the FEN, or export the results as Markdown.*
 
 ## Run from source
 
