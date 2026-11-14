@@ -3,3 +3,7 @@ node_modules/
 dist/
 release/
 engine/stockfish.exe
+
+# Only publish the sprites used by the app.
+/src/assets/ShackFish Reactions/*
+!/src/assets/ShackFish Reactions/sprites/
